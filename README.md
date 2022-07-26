@@ -30,5 +30,5 @@ Make sure to have node installed. If you don't have, please follow the guide on 
 for your operation system.
 
 If you want to be able to switch between different versions of node, we recommend using nvm, which can be downloaded
-here: https://github.com/nvm-sh/nvm or via npm by running ``npm i nvm``.
+here: https://github.com/nvm-sh/nvm .
 
