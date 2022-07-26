@@ -1,0 +1,11 @@
+{
+  "name": "Ticket #1",
+  "description": "This is one of the few tickets to THE event.",
+  "image": "https://i.pinimg.com/originals/f9/ef/83/f9ef835e39ed1f52c1c89109c7c330fd.jpg",
+  "properties": {
+    "latitude": "37°14'09.8N",
+    "Longitude": "115°48'03.9W",
+    "date": "22.12.2051",
+    "info": "bring some pineapples"
+  }
+}

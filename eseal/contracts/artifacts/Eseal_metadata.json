@@ -1,0 +1,211 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "hash",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "revokeBlock",
+						"type": "uint256"
+					}
+				],
+				"name": "DocumentRevoced",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "hash",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "sealingBlock",
+						"type": "uint256"
+					}
+				],
+				"name": "DocumentSealed",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "hash",
+						"type": "string"
+					}
+				],
+				"name": "checkSealRevocationStatus",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "hash",
+						"type": "string"
+					}
+				],
+				"name": "getSeal",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "sealingBlock",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "revokingBlock",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "sealOwner",
+								"type": "address"
+							}
+						],
+						"internalType": "struct Eseal.Seal",
+						"name": "_seal",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "hash",
+						"type": "string"
+					}
+				],
+				"name": "revokeSeal",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "hash",
+						"type": "string"
+					}
+				],
+				"name": "seal",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"events": {
+				"DocumentSealed(string,uint256)": {
+					"details": "events which are thrown when a new document has been sealed or revoked"
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"checkSealRevocationStatus(string)": {
+					"details": "public function which allows the user to check if a seal has been revoked",
+					"params": {
+						"hash": "is the hash to check"
+					}
+				},
+				"constructor": {
+					"details": "empty constructor of the contract"
+				},
+				"getSeal(string)": {
+					"details": "public getter which retrieves a seal object to a given hash (if existing)",
+					"params": {
+						"hash": "is the hash to check"
+					}
+				},
+				"revokeSeal(string)": {
+					"details": "public function which allows the owner of a seal to revoke it",
+					"params": {
+						"hash": "is the hash to revoke"
+					}
+				},
+				"seal(string)": {
+					"details": "public function to create a seal if the hash has not been used before",
+					"params": {
+						"hash": "is the hash to check"
+					}
+				}
+			},
+			"stateVariables": {
+				"hasBeenSealed": {
+					"details": "mapping which checks if a hash has already been sealed"
+				},
+				"sealToHash": {
+					"details": "mapping which uses the hash as the key to a linked Seal object"
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/eseal.sol": "Eseal"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/eseal.sol": {
+			"keccak256": "0x85a3b8d92470afceb640f9a5dd58f34249b81aafc19347b2a300b332617408cf",
+			"license": "Hedera Foundation",
+			"urls": [
+				"bzz-raw://d661b0fa613f244a860f8ec7489149143437ce1c34fda27335b8d4176426b5be",
+				"dweb:/ipfs/QmTJJ968D6t8Nta4sWkJwKx7FtYbjPmD7APuPad4Rd9TDc"
+			]
+		}
+	},
+	"version": 1
+}
