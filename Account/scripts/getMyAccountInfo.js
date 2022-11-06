@@ -16,11 +16,11 @@ async function main() {
 
     client.setOperator(myAccountId, myPrivateKey);
 
-    //Create the query
+    // Create the query
     const query = new AccountBalanceQuery()
      .setAccountId(myAccountId);
 
-    //Sign with the client operator account private key and submit to a Hedera network
+    // Sign with the client operator account private key and submit to a Hedera network
     const accountBalance = await query.execute(client);
 
     if (accountBalance) {
