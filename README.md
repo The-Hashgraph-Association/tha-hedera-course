@@ -10,25 +10,29 @@ It will give an introduction to the mayor functionalities of Hedera, being:
 
 # Preconditions
 
-## Testnet Access
+Each student should ensure that they have the following preconditions set up before attending the course.
 
-In order to interact with the Hedera Testnet, one will need to create an account.
-You can do so by visiting https://portal.hedera.com .
+## Git
 
-Once you completed the registration, you will receive a keypair for the three networks
-which Hedera is currently operating on. The pairs will look like this:
+Each participant will need to have a git client installed, with which they have retrieved the course code repository.
 
-```
-    "accountId": "0.0.1234",
-    "publicKey": "578299302a300032100f7da48026c74d86a1502b9ecdd4d69707d16032b657054dc54c63900cdd592cb714e3",
-    "privateKey": "74bf327a45a6e26bbc7eb038f7e89b0ed0214ca47fe4b382360e6867202671d2"
-```
+## Code repository
 
-## node
+The code repository is at: https://github.com/The-Hashgraph-Association/tha-hedera-course
 
-Make sure to have node installed. If you don't have, please follow the guide on https://nodejs.org/en/download/
-for your operation system.
+The repository will be publicly available for the duration of the course. After the course it will be made private.
+
+## Node.js
+
+Make sure to have node v18.9.x installed. If you don't have, please follow the guide on https://nodejs.org/en/download/
+for your operating system.
 
 If you want to be able to switch between different versions of node, we recommend using nvm, which can be downloaded
-here: https://github.com/nvm-sh/nvm .
+here: https://github.com/nvm-sh/nvm.
+
+## IDE
+
+Any Integrated Development Environment that supports NodeJS is acceptable. We prefer Visual Studio Code, and provide Run Configurations for VSC.
+
+
 
