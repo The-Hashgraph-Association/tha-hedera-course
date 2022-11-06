@@ -8,7 +8,8 @@
     "dotenv": "^16.0.1"
   },
   "scripts": {
-    "start": "node scripts/getAccountInfo.js",
+    "start:mine": "node scripts/getMyAccountInfo.js",
+    "start:other": "node scripts/getOtherAccountInfo.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
