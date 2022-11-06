@@ -5,11 +5,11 @@ const {
     Hbar
 } = require("@hashgraph/sdk");
 
-// const myAccountId = "0.0.48813362";
-// const myPrivateKey = "9dcc33fcdea6bbe71ccd45012743518767c144c057824f8228f6abfc5be1fb4e";
+const myAccountId = "0.0.48813362";
+const myPrivateKey = "9dcc33fcdea6bbe71ccd45012743518767c144c057824f8228f6abfc5be1fb4e";
 
-const myAccountId = "put your account ID here";
-const myPrivateKey = "put your private key here";
+// const myAccountId = "put your account ID here";
+// const myPrivateKey = "put your private key here";
 
 const otherAccountId = "0.0.47664706";
 
@@ -34,6 +34,8 @@ async function main() {
 
     // Request the receipt of the transaction
     const receipt = await txId.getReceipt(client);
+
+    // console.log(JSON.stringify(receipt));
 
     // Get the transaction consensus status
     const transactionStatus = receipt.status;
