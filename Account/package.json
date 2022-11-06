@@ -10,6 +10,7 @@
   "scripts": {
     "start:mine": "node scripts/getMyAccountInfo.js",
     "start:other": "node scripts/getOtherAccountInfo.js",
+    "start:transfer": "node scripts/transferHbar.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
