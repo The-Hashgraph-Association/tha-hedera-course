@@ -7,11 +7,23 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch MyAccountInfo Program",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/Account/scripts/getAccountInfo.js",
+            "program": "${workspaceFolder}/Account/scripts/getMyAccountInfo.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch OtherAccountInfo Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Account/scripts/getOtherAccountInfo.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
