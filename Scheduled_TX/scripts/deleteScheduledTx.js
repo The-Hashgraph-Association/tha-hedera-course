@@ -3,7 +3,7 @@ const {
     Client,
     PrivateKey
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../.env' })
+require('dotenv').config({ path: 'Scheduled_TX/.env' })
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);

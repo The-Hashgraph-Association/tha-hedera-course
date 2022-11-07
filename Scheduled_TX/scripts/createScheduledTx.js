@@ -5,7 +5,7 @@ const {
     PrivateKey,
     Hbar, ScheduleInfoQuery
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../.env' })
+require('dotenv').config({ path: 'Scheduled_TX/.env' })
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
@@ -36,7 +36,7 @@ async function main() {
     //Schedule a transaction
     const scheduleTransaction = await new ScheduleCreateTransaction()
         .setScheduledTransaction(transaction)
-        .setScheduleMemo("Thanks for dinner!")
+        .setScheduleMemo("Scheduled TX!")
         .setAdminKey(myPrivateKey)
         .execute(client);
 

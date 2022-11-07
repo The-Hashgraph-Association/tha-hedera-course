@@ -1,5 +1,5 @@
 {
-  "name": "Token_Service",
+  "name": "token_service",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,6 +8,10 @@
     "dotenv": "^16.0.1"
   },
   "scripts": {
+    "start:createscheduledtx": "cd ..;node Scheduled_TX/scripts/createScheduledTx.js",
+    "start:getscheduledtxinfo": "cd ..;node Scheduled_TX/scripts/getScheduledTxInfo.js",
+    "start:deletescheduledtx": "cd ..;node Scheduled_TX/scripts/deleteScheduledTx.js",
+    "start:submitsignature": "cd ..;node Scheduled_TX/scripts/submitsignature.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
