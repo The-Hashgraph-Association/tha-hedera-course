@@ -4,7 +4,7 @@ const {
     Wallet,
     PrivateKey
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../../.env' })
+require('dotenv').config({ path: 'Token_Service/.env' })
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
@@ -22,11 +22,6 @@ if (myAccountId == null ||
 const client = Client.forTestnet();
 
 client.setOperator(myAccountId, myPrivateKey);
-
-const walletUser = new Wallet(
-    myAccountId,
-    myPrivateKey
-)
 
 async function main() {
 

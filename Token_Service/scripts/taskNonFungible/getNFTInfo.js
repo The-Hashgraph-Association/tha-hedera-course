@@ -6,12 +6,15 @@ const {
     TokenId,
     AccountId
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../../.env' })
+require('dotenv').config({ path: 'Token_Service/.env' })
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
 
 const tokenId = process.env.NFT_ID;
+
+// The index of the NFT on the token object - this is the actual NFT
+const NFTTokenIndex = 1;
 
 // If we weren't able to grab it, we should throw a new error
 if (myAccountId == null ||
@@ -26,9 +29,11 @@ const client = Client.forTestnet();
 client.setOperator(myAccountId, myPrivateKey);
 
 async function main() {
+    console.log(`Searching for NFT ID ${NFTTokenIndex} on token ${tokenId}`);
+    
     //Returns the info for the specified NFT ID
     const nftInfos = await new TokenNftInfoQuery()
-        .setNftId(new NftId(TokenId.fromString(tokenId), 1))
+        .setNftId(new NftId(TokenId.fromString(tokenId), NFTTokenIndex))
         .execute(client);
 
     console.log("The ID of the token is: " + nftInfos[0].nftId.tokenId.toString());

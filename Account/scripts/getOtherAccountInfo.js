@@ -3,13 +3,10 @@ const {
     AccountBalanceQuery
 } = require("@hashgraph/sdk");
 
-// const myAccountId = "0.0.47664706";
-// const myPrivateKey = "302e020100300506032b657004220420c1e58e47370a0135097e843a9d56b3531b59d9265b30c12b185abcaa7570181a";
+const myAccountId = "0.0.47664706";
+const myPrivateKey = "302e020100300506032b657004220420c1e58e47370a0135097e843a9d56b3531b59d9265b30c12b185abcaa7570181a";
 
-const myAccountId = "put your account ID here";
-const myPrivateKey = "put your private key here";
-
-const otherAccountId = "0.0.48813362";
+const otherAccountId = "0.0.47664706";
 
 async function main() {
     // Create our connection to the Hedera network

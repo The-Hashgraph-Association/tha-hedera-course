@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch MyAccountInfo Program",
+            "name": "Account: MyAccountInfo Program",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -19,7 +19,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch OtherAccountInfo Program",
+            "name": "Account: OtherAccountInfo Program",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -31,7 +31,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Transfer Program",
+            "name": "Account: Transfer Program",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -43,7 +43,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Create Topic",
+            "name": "Consensus: Create Topic",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -55,7 +55,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Submit Message",
+            "name": "Consensus: Submit Message",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -67,7 +67,127 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Create Scheduled TX",
+            "name": "Fungible: Create Fungible Token",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskFungible/createToken.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Fungible: Query Fungible Token",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskFungible/queryBalance.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Fungible: Update Fungible Token",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskFungible/updateToken.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Fungible: Transfer Fungible Token",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskFungible/transferToken.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Fungible: Burn Fungible Token",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskFungible/burnToken.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Fungible: Delete Fungible Token",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskFungible/deleteToken.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "NFT: Create Token",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskNonFungible/createNFT.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "NFT: Mint/Transer NFT",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskNonFungible/mintAndTransferNFT.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "NFT: Get NFT Info",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskNonFungible/getNFTInfo.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "NFT: Transfer/Burn NFT",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskNonFungible/transferAndBurnNFT.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Scheduled: Create Scheduled TX",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -79,7 +199,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Get Scheduled TX Info",
+            "name": "Scheduled: Get Scheduled TX Info",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -91,7 +211,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Delete Scheduled TX",
+            "name": "Scheduled: Delete Scheduled TX",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -103,7 +223,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Submit Signature Scheduled TX",
+            "name": "Scheduled: Submit Signature Scheduled TX",
             "skipFiles": [
                 "<node_internals>/**"
             ],

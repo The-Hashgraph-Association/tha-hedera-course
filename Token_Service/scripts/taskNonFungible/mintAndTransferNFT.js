@@ -4,7 +4,7 @@ const {
     PrivateKey,
     AccountBalanceQuery, TokenAssociateTransaction, TransferTransaction, Wallet
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../../.env' })
+require('dotenv').config({ path: 'Token_Service/.env' })
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);

@@ -3,7 +3,7 @@ const {
     Client,
     TokenInfoQuery, PrivateKey
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../../.env' })
+require('dotenv').config({ path: 'Token_Service/.env' })
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
@@ -26,8 +26,8 @@ async function main() {
     //Create the transaction and freeze for manual signing
     const transaction = await new TokenUpdateTransaction()
         .setTokenId(tokenId)
-        .setTokenName("Most Bestestest Game Token")
-        .setTokenSymbol("MBGT")
+        .setTokenName("Bestest Game Token")
+        .setTokenSymbol("BGT")
         .freezeWith(client);
 
     //Sign the transaction with the client, who is set as admin and treasury account
