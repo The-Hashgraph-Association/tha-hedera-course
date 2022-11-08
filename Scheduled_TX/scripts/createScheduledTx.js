@@ -30,8 +30,8 @@ async function main() {
 
     //Create a transaction to schedule
     const transaction = new TransferTransaction()
-        .addHbarTransfer(otherAccountId, Hbar.fromTinybars(-10))
-        .addHbarTransfer(otherAccountId2, Hbar.fromTinybars(10));
+        .addHbarTransfer(otherAccountId, Hbar.fromTinybars(-100))
+        .addHbarTransfer(otherAccountId2, Hbar.fromTinybars(100));
 
     //Schedule a transaction
     const scheduleTransaction = await new ScheduleCreateTransaction()

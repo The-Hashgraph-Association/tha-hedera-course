@@ -11,7 +11,7 @@
     "start:createscheduledtx": "cd ..;node Scheduled_TX/scripts/createScheduledTx.js",
     "start:getscheduledtxinfo": "cd ..;node Scheduled_TX/scripts/getScheduledTxInfo.js",
     "start:deletescheduledtx": "cd ..;node Scheduled_TX/scripts/deleteScheduledTx.js",
-    "start:submitsignature": "cd ..;node Scheduled_TX/scripts/submitsignature.js",
+    "start:submitsignature": "cd ..;node Scheduled_TX/scripts/submitSignature.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
