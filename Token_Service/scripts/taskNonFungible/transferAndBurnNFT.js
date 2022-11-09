@@ -47,7 +47,7 @@ async function main() {
     let tokenTransferSubmit = await tokenTransferTx.execute(client);
     let tokenTransferRx = await tokenTransferSubmit.getReceipt(client);
 
-    console.log(`\n- NFT transfer from Treasury to Buyer: ${tokenTransferRx.status} \n`);
+    console.log(`\n- NFT transfer from Buyer to Treasury: ${tokenTransferRx.status} \n`);
 
     // Check the balance of the treasury account after the transfer
     balanceCheckTx = await new AccountBalanceQuery().setAccountId(myAccountId).execute(client);
