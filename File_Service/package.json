@@ -1,0 +1,16 @@
+{
+  "name": "consensus_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@hashgraph/sdk": "^2.18.5",
+    "dotenv": "^16.0.1"
+  },
+  "scripts": {
+    "start:createfile": "cd ..;HEDERA_NETWORK=testnet node File_Service/scripts/createFile.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
