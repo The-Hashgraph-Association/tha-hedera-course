@@ -246,6 +246,81 @@
             "env": {
                 "HEDERA_NETWORK": "testnet"
             }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "SmartContract: Deploy To Hedera",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/SmartContract_Service/scripts/deployToHedera.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "HEDERA_NETWORK": "testnet"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "SmartContract: Seal Document",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/SmartContract_Service/scripts/sealDocument.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "HEDERA_NETWORK": "testnet"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "SmartContract: Get Seal",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/SmartContract_Service/scripts/getSeal.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "HEDERA_NETWORK": "testnet"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "SmartContract: Revoke Seal",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/SmartContract_Service/scripts/revokeDocument.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "HEDERA_NETWORK": "testnet"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "SmartContract: Get Revocation Status",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/SmartContract_Service/scripts/checkSealRevocationStatus.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "HEDERA_NETWORK": "testnet"
+            }
         }
     ]
 }

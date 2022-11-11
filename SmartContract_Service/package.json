@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:deploytohedera": "cd ..;node SmartContract_Service/scripts/deployToHedera.js",
+    "start:seal": "cd ..;node SmartContract_Service/scripts/sealDocument.js",
+    "start:getseal": "cd ..;node SmartContract_Service/scripts/getSeal.js",
+    "start:getrevocationstatus": "cd ..;node SmartContract_Service/scripts/checkSealRevocationStatus.js",
+    "start:revokeseal": "cd ..;node SmartContract_Service/scripts/revokeDocument.js",
     "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
   "author": "",

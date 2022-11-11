@@ -4,7 +4,7 @@ const {
     ContractCreateTransaction,
     PrivateKey,
     ContractFunctionParameters} = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../.env' })
+require('dotenv').config({ path: 'SmartContract_Service/.env' });
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
@@ -24,7 +24,7 @@ client.setOperator(myAccountId, myPrivateKey);
 async function main() {
     let esealCompiled = require("../artifacts/contracts/eseal.sol/Eseal.json");
     const bytecode = esealCompiled.bytecode;
-    console.log(bytecode);
+    // console.log(bytecode);
 
     //Create a file on Hedera and store the hex-encoded bytecode
     const fileCreateTx = new FileCreateTransaction()
@@ -64,6 +64,7 @@ async function main() {
     //Log the smart contract ID
     console.log("The smart contract ID is " + newContractId);
 
+    process.exit();
 }
 
 main();

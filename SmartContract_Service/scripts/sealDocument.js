@@ -4,7 +4,8 @@ const {
     ContractExecuteTransaction,
     PrivateKey,
 } = require("@hashgraph/sdk");
-require('dotenv').config({path: '../.env'})
+require('dotenv').config({ path: 'SmartContract_Service/.env' });
+
 const Web3 = require('web3');
 const web3 = new Web3;
 let abi;
@@ -68,6 +69,7 @@ async function main() {
 
     });
 
+    process.exit();
 }
 
 /**

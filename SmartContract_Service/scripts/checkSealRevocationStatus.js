@@ -5,7 +5,7 @@ const {
     Hbar,
     PrivateKey
 } = require("@hashgraph/sdk");
-require('dotenv').config({path: '../.env'})
+require('dotenv').config({ path: 'SmartContract_Service/.env' });
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
@@ -41,9 +41,11 @@ async function main() {
     //Submit the transaction to a Hedera network
     const contractQuerySubmit = await contractCallQuery.execute(client);
     const contractQueryResult = contractQuerySubmit.getBool(0);
+
     //Log the updated message to the console
     console.log("The updated contract message: " + contractQueryResult);
 
+    process.exit();
 }
 
 main();
