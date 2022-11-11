@@ -1,18 +1,18 @@
 const {
-    TokenUpdateTransaction,
+    TokenMintTransaction,
     Client,
     TokenInfoQuery, PrivateKey
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' })
 
-const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+const otherAccountId = process.env.OTHER_ACCOUNT_ID;
+const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
 
 const tokenId = process.env.TOKEN_ID;
 
 // If we weren't able to grab it, we should throw a new error
-if (myAccountId == null ||
-    myPrivateKey == null ) {
+if (otherAccountId == null ||
+    otherPrivateKey == null ) {
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
 }
 
@@ -20,18 +20,17 @@ if (myAccountId == null ||
 // The Hedera JS SDK makes this really easy!
 const client = Client.forTestnet();
 
-client.setOperator(myAccountId, myPrivateKey);
+client.setOperator(otherAccountId, otherPrivateKey);
 
 async function main() {
     //Create the transaction and freeze for manual signing
-    const transaction = await new TokenUpdateTransaction()
+    const transaction = await new TokenMintTransaction()
         .setTokenId(tokenId)
-        .setTokenName("Bestest Game Token")
-        .setTokenSymbol("BGT")
+        .setAmount(3000)
         .freezeWith(client);
 
     //Sign the transaction with the client, who is set as admin and treasury account
-    const signTx =  await transaction.sign(myPrivateKey);
+    const signTx =  await transaction.sign(otherPrivateKey);
 
     //Submit the signed transaction to a Hedera network
     const txResponse = await signTx.execute(client);

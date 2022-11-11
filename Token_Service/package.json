@@ -13,7 +13,7 @@
     "start:updatefungible": "cd ..;node Token_Service/scripts/taskFungible/updateToken.js",
     "start:transferfungible": "cd ..;node Token_Service/scripts/taskFungible/transferToken.js",
     "start:burnfungible": "cd ..;node Token_Service/scripts/taskFungible/burnToken.js",
-    "start:deletefungible": "cd ..;node Token_Service/scripts/taskFungible/deleteToken.js",
+    "start:increasefungiblesupply": "cd ..;node Token_Service/scripts/taskFungible/increaseTokenSupply.js",
     "start:createNFT": "cd ..;node Token_Service/scripts/taskNonFungible/createNFT.js",
     "start:mintAndTransferNFT": "cd ..;node Token_Service/scripts/taskNonFungible/mintAndTransferNFT.js",
     "start:getNFTInfo": "cd ..;node Token_Service/scripts/taskNonFungible/getNFTInfo.js",

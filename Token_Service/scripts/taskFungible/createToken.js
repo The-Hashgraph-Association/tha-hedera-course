@@ -10,10 +10,17 @@ require('dotenv').config({ path: 'Token_Service/.env' })
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
 
-// If we weren't able to grab it, we should throw a new error
 if (myAccountId == null ||
     myPrivateKey == null ) {
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
+}
+
+const otherAccountId = process.env.OTHER_ACCOUNT_ID;
+const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+
+if (otherAccountId == null ||
+    otherPrivateKey == null ) {
+    throw new Error("Environment variables otherAccountId and otherPrivateKey must be present");
 }
 
 // Create our connection to the Hedera network
@@ -27,6 +34,10 @@ const walletUser = new Wallet(
     myPrivateKey
 )
 
+const otherUser = new Wallet(
+    otherAccountId,
+    otherPrivateKey
+)
 async function main() {
     //Create the transaction and freeze for manual signing
     const transaction = await new TokenCreateTransaction()
@@ -36,7 +47,7 @@ async function main() {
         .setTreasuryAccountId(myAccountId)
         .setInitialSupply(2000)
         .setAdminKey(walletUser.publicKey)
-        .setSupplyKey(myPrivateKey)
+        .setSupplyKey(otherUser.publicKey)
         .freezeWith(client);
 
     //Sign the transaction with the client, who is set as admin and treasury account
@@ -69,6 +80,7 @@ async function main() {
 
     console.log("The balance of the user is: " + tokenBalance.tokens.get(tokenId));
 
+    process.exit();
 }
 
 async function queryTokenFunction(functionName, tokenId) {

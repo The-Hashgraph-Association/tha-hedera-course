@@ -102,6 +102,7 @@ async function main() {
     balanceCheckTx = await new AccountBalanceQuery().setAccountId(otherAccountId).execute(client);
     console.log(`- Buyer's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
 
+    process.exit();
 }
 
 main();

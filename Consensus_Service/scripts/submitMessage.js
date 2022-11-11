@@ -22,18 +22,20 @@ const client = Client.forTestnet();
 client.setOperator(myAccountId, myPrivateKey);
 
 async function main() {
-// Send one message
+    // Send one message
     let sendResponse = await new TopicMessageSubmitTransaction({
         topicId: topicId,
         message: "This is a very first message to my new topic!",
     }).execute(client);
 
-//Get the receipt of the transaction
+    //Get the receipt of the transaction
     const getReceipt = await sendResponse.getReceipt(client);
 
-//Get the status of the transaction
-    const transactionStatus = getReceipt.status
-    console.log("The message transaction status: " + transactionStatus)
+    //Get the status of the transaction
+    const transactionStatus = getReceipt.status;
+    console.log("The message transaction status: " + transactionStatus);
+
+    process.exit();
 }
 
 main();

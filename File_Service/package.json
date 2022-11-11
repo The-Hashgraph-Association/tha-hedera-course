@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start:createfile": "cd ..;HEDERA_NETWORK=testnet node File_Service/scripts/createFile.js",
+    "start:retrievefile": "cd ..;HEDERA_NETWORK=testnet node File_Service/scripts/retrieveFile.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

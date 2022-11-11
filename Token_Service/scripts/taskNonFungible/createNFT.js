@@ -35,7 +35,7 @@ async function main() {
         .setTreasuryAccountId(myAccountId)
         .setSupplyType(TokenSupplyType.Finite)
         .setMaxSupply(5)
-        .setSupplyKey(myPrivateKey)
+        .setSupplyKey(myAccountId)
         .freezeWith(client);
 
     //Sign the transaction with the treasury key
@@ -57,6 +57,7 @@ async function main() {
 
     console.log(`- User balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} units of token ID ${tokenId}`);
 
+    process.exit();
 }
 
 main();

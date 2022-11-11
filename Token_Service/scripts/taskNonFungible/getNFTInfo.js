@@ -40,6 +40,8 @@ async function main() {
     console.log("The serial of the token is: " + nftInfos[0].nftId.serial.toString());
     console.log("The metadata of the token is: " + nftInfos[0].metadata.toString());
     console.log("Current owner: " + new AccountId(nftInfos[0].accountId).toString());
+
+    process.exit();
 }
 
 main();

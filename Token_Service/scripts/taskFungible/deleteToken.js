@@ -44,7 +44,7 @@ async function main() {
 
     console.log("The transaction consensus status " +transactionStatus.toString());
 
-
+    process.exit();
 }
 
 main();

@@ -40,6 +40,7 @@ async function main() {
     const transactionStatus = receipt.status;
     console.log("The transaction consensus status is " +transactionStatus);
 
+    process.exit();
 }
 
 main();

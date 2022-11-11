@@ -42,6 +42,7 @@ async function main() {
     console.log("The balance of the user is: " + userWalletBalance.tokens.get(tokenId));
     console.log("The balance of the other user is: " + otherWalletBalance.tokens.get(tokenId));
 
+    process.exit();
 }
 
 async function queryBalance(user) {

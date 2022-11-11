@@ -41,6 +41,8 @@ async function main() {
     } else {
         console.log("The time of execution of the scheduled tx is: ", new Timestamp(info.executed).toDate());
     }
+
+    process.exit();
 }
 
 main();

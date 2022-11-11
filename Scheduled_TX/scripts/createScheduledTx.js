@@ -51,6 +51,7 @@ async function main() {
     const scheduledTxId = receipt.scheduledTransactionId;
     console.log("The scheduled transaction ID is " +scheduledTxId);
 
+    process.exit();
 }
 
 main();

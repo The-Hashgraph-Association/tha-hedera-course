@@ -35,6 +35,8 @@ async function main() {
 
     // Wait 5 seconds between consensus topic creation and subscription
     await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    process.exit();
 }
 
 main();

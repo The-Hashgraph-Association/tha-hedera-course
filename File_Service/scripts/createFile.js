@@ -3,7 +3,6 @@ const {
     FileAppendTransaction,
     FileContentsQuery,
     TransactionRecordQuery,
-    ExchangeRates,
     Hbar,
     LocalProvider,
     Wallet
@@ -25,8 +24,6 @@ const wallet = new Wallet(
 );
 
 async function main() {
-    let fee = 0;
-
     const data = fs.readFileSync('File_Service/artifacts/hedera.pdf');
 
     console.log(`The size of the data is ${data.length}`);
@@ -80,7 +77,7 @@ async function main() {
 
     console.log(`Exchange Rate create (USD Cents) TX ${exchangeRateCreate}, append TX ${exchangeRateAppend}`);
 
-    exit(0);
+    process.exit();
 }
 
 main();
