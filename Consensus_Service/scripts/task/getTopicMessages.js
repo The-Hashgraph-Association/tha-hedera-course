@@ -2,7 +2,7 @@ const {
     TopicMessageQuery,
     Client
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: '../../.env' })
+require('dotenv').config({ path: '../../.env' });
 
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = process.env.MY_PRIVATE_KEY;

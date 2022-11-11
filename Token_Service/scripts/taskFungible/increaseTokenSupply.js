@@ -3,7 +3,7 @@ const {
     Client,
     TokenInfoQuery, PrivateKey
 } = require("@hashgraph/sdk");
-require('dotenv').config({ path: 'Token_Service/.env' })
+require('dotenv').config({ path: 'Token_Service/.env' });
 
 const otherAccountId = process.env.OTHER_ACCOUNT_ID;
 const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
