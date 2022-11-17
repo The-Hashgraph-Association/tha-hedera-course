@@ -28,6 +28,8 @@ async function main() {
         console.log("All account Info for the other account:")
         console.log(JSON.stringify(accountBalance));
     }
+    
+    process.exit();
 }
 
 main();

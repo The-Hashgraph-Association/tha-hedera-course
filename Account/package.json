@@ -8,8 +8,8 @@
     "dotenv": "^16.0.1"
   },
   "scripts": {
-    "start:mine": "node scripts/getMyAccountInfo.js",
-    "start:other": "node scripts/getOtherAccountInfo.js",
+    "start:myaccountbalance": "node scripts/getMyAccountInfo.js",
+    "start:otheraccountbalance": "node scripts/getOtherAccountInfo.js",
     "start:transfer": "node scripts/transferHbar.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

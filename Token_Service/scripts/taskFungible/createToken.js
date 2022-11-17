@@ -29,12 +29,12 @@ const client = Client.forTestnet();
 
 client.setOperator(myAccountId, myPrivateKey);
 
-const walletUser = new Wallet(
+const adminUser = new Wallet(
     myAccountId,
     myPrivateKey
 )
 
-const otherUser = new Wallet(
+const supplyUser = new Wallet(
     otherAccountId,
     otherPrivateKey
 )
@@ -46,8 +46,8 @@ async function main() {
         .setTokenType(TokenType.FungibleCommon)
         .setTreasuryAccountId(myAccountId)
         .setInitialSupply(2000)
-        .setAdminKey(walletUser.publicKey)
-        .setSupplyKey(otherUser.publicKey)
+        .setAdminKey(adminUser.publicKey)
+        .setSupplyKey(supplyUser.publicKey)
         .freezeWith(client);
 
     //Sign the transaction with the client, who is set as admin and treasury account
@@ -73,7 +73,7 @@ async function main() {
 
     //Create the query
     const balanceQuery = new AccountBalanceQuery()
-        .setAccountId(walletUser.accountId);
+        .setAccountId(adminUser.accountId);
 
     //Sign with the client operator private key and submit to a Hedera network
     const tokenBalance = await balanceQuery.execute(client);
