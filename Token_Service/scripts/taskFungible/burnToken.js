@@ -8,6 +8,8 @@ require('dotenv').config({ path: 'Token_Service/.env' });
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
 
+const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+
 const tokenId = process.env.TOKEN_ID;
 
 // If we weren't able to grab it, we should throw a new error
@@ -31,7 +33,7 @@ async function main() {
         .freezeWith(client);
 
     //Sign with the supply private key of the token
-    const signTx = await transaction.sign(myPrivateKey);
+    const signTx = await transaction.sign(otherPrivateKey);
 
     //Submit the transaction to a Hedera network
     const txResponse = await signTx.execute(client);

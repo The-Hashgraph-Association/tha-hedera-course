@@ -3,10 +3,11 @@
 This repo holds all assets which are required for the three day course of Hedera.
 It will give an introduction to the mayor functionalities of Hedera, being:
 
-1. The Hedera Consensus Service
-2. The Hedera Token Service
-3. Scheduled Transactions 
-4. Delpoy and interact with Solidity contracts
+ - Hedera Accounts and HBar
+ - The Hedera Consensus Service
+ - The Hedera Token Service
+ - Scheduled Transactions 
+ - Deploy and interact with Solidity contracts
 
 # Preconditions
 

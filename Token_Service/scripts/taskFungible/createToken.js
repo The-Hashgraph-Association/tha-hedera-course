@@ -38,6 +38,7 @@ const supplyUser = new Wallet(
     otherAccountId,
     otherPrivateKey
 )
+
 async function main() {
     //Create the transaction and freeze for manual signing
     const transaction = await new TokenCreateTransaction()
