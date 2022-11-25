@@ -41,7 +41,7 @@ async function main() {
     const bytecodeFileId = fileReceipt.fileId;
 
     //Log the file ID
-    console.log("The smart contract byte code file ID is " +bytecodeFileId)
+    console.log("The smart contract byte code file ID is " + bytecodeFileId)
 
     // Instantiate the contract instance
     const contractTx = await new ContractCreateTransaction()
