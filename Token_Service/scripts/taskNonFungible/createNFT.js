@@ -35,7 +35,7 @@ async function main() {
         .setTreasuryAccountId(myAccountId)
         .setSupplyType(TokenSupplyType.Finite)
         .setMaxSupply(5)
-        .setSupplyKey(myAccountId)
+        .setSupplyKey(myPrivateKey)
         .freezeWith(client);
 
     //Sign the transaction with the treasury key
