@@ -33,7 +33,7 @@ const wallet = new Wallet(
 
 async function main() {
     //IPFS content identifiers for which we will create a NFT
-    CID = "bafybeig5vygdwxnahwgp7vku6kyz4e3hdjsg4uikfz5sujbsummozw3wp4";
+    CID = "ipfs://bafybeig5vygdwxnahwgp7vku6kyz4e3hdjsg4uikfz5sujbsummozw3wp4";
 
     // Mint new NFT
     let mintTx = await new TokenMintTransaction()

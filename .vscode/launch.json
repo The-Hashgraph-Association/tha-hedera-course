@@ -250,6 +250,21 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "File: Retrieve File",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/File_Service/scripts/retrieveFile.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "env": {
+                "HEDERA_NETWORK": "testnet"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "SmartContract: Deploy To Hedera",
             "skipFiles": [
                 "<node_internals>/**"
