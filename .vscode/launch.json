@@ -115,6 +115,18 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Fungible: Increase Fungible Supply",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Token_Service/scripts/taskFungible/increaseTokenSupply.js",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Fungible: Burn Fungible Token",
             "skipFiles": [
                 "<node_internals>/**"
