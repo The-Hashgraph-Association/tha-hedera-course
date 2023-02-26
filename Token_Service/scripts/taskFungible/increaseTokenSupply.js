@@ -5,38 +5,38 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
-const otherAccountId = process.env.OTHER_ACCOUNT_ID;
-const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+const supplyAccountId = process.env.OTHER_ACCOUNT_ID;
+const supplyPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
 
 const tokenId = process.env.TOKEN_ID;
 
 // If we weren't able to grab it, we should throw a new error
-if (otherAccountId == null ||
-    otherPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
+if (supplyAccountId == null ||
+    supplyPrivateKey == null ) {
+    throw new Error("Environment variables supplyAccountId and supplyPrivateKey must be present");
 }
 
 // Create our connection to the Hedera network
 // The Hedera JS SDK makes this really easy!
-const client = Client.forTestnet();
+const supplyClient = Client.forTestnet();
 
-client.setOperator(otherAccountId, otherPrivateKey);
+supplyClient.setOperator(supplyAccountId, supplyPrivateKey);
 
 async function main() {
     //Create the transaction and freeze for manual signing
     const transaction = await new TokenMintTransaction()
         .setTokenId(tokenId)
         .setAmount(3000)
-        .freezeWith(client);
+        .freezeWith(supplyClient);
 
     //Sign the transaction with the client, who is set as admin and treasury account
-    const signTx =  await transaction.sign(otherPrivateKey);
+    const signTx =  await transaction.sign(supplyPrivateKey);
 
     //Submit the signed transaction to a Hedera network
-    const txResponse = await signTx.execute(client);
+    const txResponse = await signTx.execute(supplyClient);
 
     //Request the receipt of the transaction
-    const receipt = await txResponse.getReceipt(client);
+    const receipt = await txResponse.getReceipt(supplyClient);
 
     //Get the transaction consensus status
     const transactionStatus = receipt.status.toString();
@@ -63,7 +63,7 @@ async function queryTokenFunction(functionName, tokenId) {
         .setTokenId(tokenId);
 
     console.log(functionName);
-    const body = await query.execute(client);
+    const body = await query.execute(supplyClient);
 
     //Sign with the client operator private key, submit the query to the network and get the token supply
     let result;

@@ -15,12 +15,12 @@ if (myAccountId == null ||
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
 }
 
-const otherAccountId = process.env.OTHER_ACCOUNT_ID;
-const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+const supplyAccountId = process.env.OTHER_ACCOUNT_ID;
+const supplyPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
 
-if (otherAccountId == null ||
-    otherPrivateKey == null ) {
-    throw new Error("Environment variables otherAccountId and otherPrivateKey must be present");
+if (supplyAccountId == null ||
+    supplyPrivateKey == null ) {
+    throw new Error("Environment variables supplyAccountId and suppkyPrivateKey must be present");
 }
 
 // Create our connection to the Hedera network
@@ -35,8 +35,8 @@ const adminUser = new Wallet(
 )
 
 const supplyUser = new Wallet(
-    otherAccountId,
-    otherPrivateKey
+    supplyAccountId,
+    supplyPrivateKey
 )
 
 async function main() {
