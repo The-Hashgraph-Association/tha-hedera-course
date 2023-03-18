@@ -32,10 +32,7 @@ async function main() {
         //Set the gas to execute the contract call
         .setGas(100000)
         //Set the contract function to call
-        .setFunction("getSeal", new ContractFunctionParameters().addString(hash))
-        //Set the query payment for the node returning the request
-        //This value must cover the cost of the request otherwise will fail
-        .setQueryPayment(new Hbar(10));
+        .setFunction("getSeal", new ContractFunctionParameters().addString(hash));
 
     //Submit the transaction to a Hedera network
     const contractQuerySubmit = await contractCallQuery.execute(client);

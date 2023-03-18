@@ -6,17 +6,14 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Scheduled_TX/.env' });
 
-const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
-
 const otherAccountId = process.env.OTHER_ACCOUNT_ID;
 const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
 
 const scheduleId = process.env.SCHEDULE_ID;
 
 // If we weren't able to grab it, we should throw a new error
-if (myAccountId == null ||
-    myPrivateKey == null ) {
+if (otherAccountId == null ||
+    otherPrivateKey == null ) {
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
 }
 
@@ -24,7 +21,7 @@ if (myAccountId == null ||
 // The Hedera JS SDK makes this really easy!
 const client = Client.forTestnet();
 
-client.setOperator(myAccountId, myPrivateKey);
+client.setOperator(otherAccountId, otherPrivateKey);
 
 async function main() {
 
