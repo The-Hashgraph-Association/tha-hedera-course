@@ -11,7 +11,7 @@ const otherAccountId = "0.0.14321";
 async function main() {
     // Create our connection to the Hedera network
     // The Hedera JS SDK makes this really easy!
-    const client = Client.forTestnet();5
+    const client = Client.forTestnet();
 
     client.setOperator(myAccountId, myPrivateKey);
 
