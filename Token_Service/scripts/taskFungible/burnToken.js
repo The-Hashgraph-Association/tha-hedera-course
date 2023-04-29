@@ -5,24 +5,26 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
-const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+// ------------------ Get ENV variables and validate them --------------------
 
-const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+const supplyAccountId = process.env.OTHER_ACCOUNT_ID;
+const supplyPrivateKeyString = process.env.OTHER_PRIVATE_KEY;
+
+if (supplyAccountId == null ||
+    supplyPrivateKeyString == null ) {
+    throw new Error("Environment variables OTHER_ACCOUNT_ID and OTHER_PRIVATE_KEY must be present");
+}
+
+const supplyPrivateKey = PrivateKey.fromString(supplyPrivateKeyString);
 
 const tokenId = process.env.TOKEN_ID;
 
-// If we weren't able to grab it, we should throw a new error
-if (myAccountId == null ||
-    myPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
-}
+// -------------------------- Set up testnet client --------------------------
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
 const client = Client.forTestnet();
+client.setOperator(supplyAccountId, supplyPrivateKey);
 
-client.setOperator(myAccountId, myPrivateKey);
+// ---------------------------------------------------------------------------
 
 async function main() {
 
@@ -33,7 +35,7 @@ async function main() {
         .freezeWith(client);
 
     //Sign with the supply private key of the token
-    const signTx = await transaction.sign(otherPrivateKey);
+    const signTx = await transaction.sign(supplyPrivateKey);
 
     //Submit the transaction to a Hedera network
     const txResponse = await signTx.execute(client);

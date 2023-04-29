@@ -7,40 +7,56 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
-const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+// ------------------ Get ENV variables and validate them --------------------
 
-const otherAccountId = process.env.OTHER_ACCOUNT_ID;
-const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+const myAccountId = process.env.MY_ACCOUNT_ID;
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
+
+if (myAccountId == null ||
+    myPrivateKeyString == null ) {
+    throw new Error("Environment variables MY_ACCOUNT_ID and MY_PRIVATE_KEY must be present");
+}
+
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
+
+const recipientAccountId = process.env.OTHER_ACCOUNT_ID;
+const recipientPrivateKeyString = process.env.OTHER_PRIVATE_KEY;
+
+if (recipientAccountId == null ||
+    recipientPrivateKeyString == null ) {
+    throw new Error("Environment variables OTHER_ACCOUNT_ID and OTHER_PRIVATE_KEY must be present");
+}
+
+const recipientPrivateKey = PrivateKey.fromString(recipientPrivateKeyString);
+
+const myWallet = new Wallet(
+    myAccountId,
+    myPrivateKey
+)
+
+const recipientWallet = new Wallet(
+    recipientAccountId,
+    recipientPrivateKey
+);
 
 const tokenId = process.env.TOKEN_ID;
 
-// If we weren't able to grab it, we should throw a new error
-if (myAccountId == null ||
-    myPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
-}
+// -------------------------- Set up testnet client --------------------------
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
 const client = Client.forTestnet();
-
 client.setOperator(myAccountId, myPrivateKey);
 
-const wallet = new Wallet(
-    otherAccountId,
-    otherPrivateKey
-);
+// ---------------------------------------------------------------------------
 
 async function main() {
 
     //  Before an account that is not the treasury for a token can receive or send this specific token ID, the account
     //  must become “associated” with the token.
     let associateOtherWalletTx = await new TokenAssociateTransaction()
-        .setAccountId(wallet.accountId)
+        .setAccountId(recipientWallet.accountId)
         .setTokenIds([tokenId])
         .freezeWith(client)
-        .sign(otherPrivateKey)
+        .sign(recipientPrivateKey)
 
     //SUBMIT THE TRANSACTION
     let associateOtherWalletTxSubmit = await associateOtherWalletTx.execute(client);
@@ -49,12 +65,12 @@ async function main() {
     let associateOtherWalletRx = await associateOtherWalletTxSubmit.getReceipt(client);
 
     //LOG THE TRANSACTION STATUS
-    console.log(`- Token association with the users account: ${associateOtherWalletRx.status} \n`);
+    console.log(`Token association with the users account: ${associateOtherWalletRx.status}`);
 
     //Create the transfer transaction
     const transaction = await new TransferTransaction()
         .addTokenTransfer(tokenId, client.operatorAccountId, -3)
-        .addTokenTransfer(tokenId, wallet.accountId, 3)
+        .addTokenTransfer(tokenId, recipientWallet.accountId, 3)
         .freezeWith(client);
 
     //Sign with the sender account private key

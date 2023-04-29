@@ -7,27 +7,26 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
+// ------------------ Get ENV variables and validate them --------------------
 const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
 
 if (myAccountId == null ||
-    myPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
+    myPrivateKeyString == null ) {
+    throw new Error("Environment variables MY_ACCOUNT_ID and MY_PRIVATE_KEY must be present");
 }
+
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
 
 const supplyAccountId = process.env.OTHER_ACCOUNT_ID;
-const supplyPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+const supplyPrivateKeyString = process.env.OTHER_PRIVATE_KEY;
 
 if (supplyAccountId == null ||
-    supplyPrivateKey == null ) {
-    throw new Error("Environment variables supplyAccountId and suppkyPrivateKey must be present");
+    supplyPrivateKeyString == null ) {
+    throw new Error("Environment variables OTHER_ACCOUNT_ID and OTHER_PRIVATE_KEY must be present");
 }
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
-const client = Client.forTestnet();
-
-client.setOperator(myAccountId, myPrivateKey);
+const supplyPrivateKey = PrivateKey.fromString(supplyPrivateKeyString);
 
 const adminUser = new Wallet(
     myAccountId,
@@ -38,6 +37,13 @@ const supplyUser = new Wallet(
     supplyAccountId,
     supplyPrivateKey
 )
+
+// -------------------------- Set up testnet client --------------------------
+
+const client = Client.forTestnet();
+client.setOperator(myAccountId, myPrivateKey);
+
+// ---------------------------------------------------------------------------
 
 async function main() {
     //Create the transaction and freeze for manual signing

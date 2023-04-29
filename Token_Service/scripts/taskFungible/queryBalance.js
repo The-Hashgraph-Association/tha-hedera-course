@@ -4,40 +4,51 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
+// ------------------ Get ENV variables and validate them --------------------
+
 const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
 
-const otherAccountId = process.env.OTHER_ACCOUNT_ID;
-const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
-
-const tokenId = process.env.TOKEN_ID;
-
-// If we weren't able to grab it, we should throw a new error
 if (myAccountId == null ||
-    myPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
+    myPrivateKeyString == null ) {
+    throw new Error("Environment variables MY_ACCOUNT_ID and MY_PRIVATE_KEY must be present");
 }
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
-const client = Client.forTestnet();
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
 
-client.setOperator(myAccountId, myPrivateKey);
+const recipientAccountId = process.env.OTHER_ACCOUNT_ID;
+const recipientPrivateKeyString = process.env.OTHER_PRIVATE_KEY;
 
-const walletUser = new Wallet(
+if (recipientAccountId == null ||
+    recipientPrivateKeyString == null ) {
+    throw new Error("Environment variables OTHER_ACCOUNT_ID and OTHER_PRIVATE_KEY must be present");
+}
+
+const recipientPrivateKey = PrivateKey.fromString(recipientPrivateKeyString);
+
+const myWallet = new Wallet(
     myAccountId,
     myPrivateKey
 )
 
-const walletOther = new Wallet(
-    otherAccountId,
-    otherPrivateKey
+const recipientWallet = new Wallet(
+    recipientAccountId,
+    recipientPrivateKey
 );
+
+const tokenId = process.env.TOKEN_ID;
+
+// -------------------------- Set up testnet client --------------------------
+
+const client = Client.forTestnet();
+client.setOperator(myAccountId, myPrivateKey);
+
+// ---------------------------------------------------------------------------
 
 async function main() {
 
-    const userWalletBalance = await  queryBalance(walletUser);
-    const otherWalletBalance = await queryBalance(walletOther);
+    const userWalletBalance = await  queryBalance(myWallet);
+    const otherWalletBalance = await queryBalance(recipientWallet);
 
     console.log("The balance of the user is: " + userWalletBalance.tokens.get(tokenId));
     console.log("The balance of the other user is: " + otherWalletBalance.tokens.get(tokenId));

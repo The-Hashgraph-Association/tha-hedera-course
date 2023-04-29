@@ -7,55 +7,70 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
-const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+// ------------------ Get ENV variables and validate them --------------------
 
-const otherAccountId = process.env.OTHER_ACCOUNT_ID;
-const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
+const myAccountId = process.env.MY_ACCOUNT_ID;
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
+
+if (myAccountId == null ||
+    myPrivateKeyString == null ) {
+    throw new Error("Environment variables MY_ACCOUNT_ID and MY_PRIVATE_KEY must be present");
+}
+
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
+
+const recipientAccountId = process.env.OTHER_ACCOUNT_ID;
+const recipientPrivateKeyString = process.env.OTHER_PRIVATE_KEY;
+
+if (recipientAccountId == null ||
+    recipientPrivateKeyString == null ) {
+    throw new Error("Environment variables OTHER_ACCOUNT_ID and OTHER_PRIVATE_KEY must be present");
+}
+
+const recipientPrivateKey = PrivateKey.fromString(recipientPrivateKeyString);
 
 const tokenId = process.env.NFT_ID;
 
-// If we weren't able to grab it, we should throw a new error
-if (myAccountId == null ||
-    myPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
-}
+// -------------------------- Set up testnet client --------------------------
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
 const client = Client.forTestnet();
 
 client.setOperator(myAccountId, myPrivateKey);
 
+// ---------------------------------------------------------------------------
+
 async function main() {
+    console.log(`--> Before transfer back to treasury`);
 
     // Check the balance before the transfer for the treasury account
     balanceCheckTx = await new AccountBalanceQuery().setAccountId(myAccountId).execute(client);
-    console.log(`- Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
+    console.log(`Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
 
     // Check the balance before the transfer for the buyer's account
-    balanceCheckTx = await new AccountBalanceQuery().setAccountId(otherAccountId).execute(client);
-    console.log(`- Buyer's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
+    balanceCheckTx = await new AccountBalanceQuery().setAccountId(recipientAccountId).execute(client);
+    console.log(`Buyer's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
 
     // Transfer the NFT from treasury to the buyer
     // Sign with the treasury key to authorize the transfer
     let tokenTransferTx = await new TransferTransaction()
-        .addNftTransfer(tokenId, 1, otherAccountId, myAccountId)
+        .addNftTransfer(tokenId, 1, recipientAccountId, myAccountId)
         .freezeWith(client)
-        .sign(otherPrivateKey);
+        .sign(recipientPrivateKey);
 
     let tokenTransferSubmit = await tokenTransferTx.execute(client);
     let tokenTransferRx = await tokenTransferSubmit.getReceipt(client);
 
-    console.log(`\n- NFT transfer from Buyer to Treasury: ${tokenTransferRx.status} \n`);
+    console.log(`NFT transfer from Buyer to Treasury: ${tokenTransferRx.status}`);
+
+    console.log(`--> After transfer back to treasury`);
 
     // Check the balance of the treasury account after the transfer
     balanceCheckTx = await new AccountBalanceQuery().setAccountId(myAccountId).execute(client);
-    console.log(`- Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
+    console.log(`Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
 
     // Check the balance of the buyer's account after the transfer
-    balanceCheckTx = await new AccountBalanceQuery().setAccountId(otherAccountId).execute(client);
-    console.log(`- Buyer's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
+    balanceCheckTx = await new AccountBalanceQuery().setAccountId(recipientAccountId).execute(client);
+    console.log(`Buyer's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
 
     //Burn the nft and freeze the unsigned transaction for manual signing
     const transaction = await new TokenBurnTransaction()
@@ -75,15 +90,17 @@ async function main() {
     //Get the transaction consensus status
     const transactionStatus = receipt.status;
 
+    console.log(`--> After burn`);
+
     console.log("The transaction consensus status " +transactionStatus.toString());
 
     // Check the balance of the treasury account after the transfer
     balanceCheckTx = await new AccountBalanceQuery().setAccountId(myAccountId).execute(client);
-    console.log(`- Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
+    console.log(`Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
 
     // Check the balance of the buyer's account after the transfer
-    balanceCheckTx = await new AccountBalanceQuery().setAccountId(otherAccountId).execute(client);
-    console.log(`- Buyer's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
+    balanceCheckTx = await new AccountBalanceQuery().setAccountId(recipientAccountId).execute(client);
+    console.log(`Buyer's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} NFTs of ID ${tokenId}`);
 
     process.exit();
 }

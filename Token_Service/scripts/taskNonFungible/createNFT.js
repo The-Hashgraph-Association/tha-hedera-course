@@ -8,20 +8,24 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
-const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+// ------------------ Get ENV variables and validate them --------------------
 
-// If we weren't able to grab it, we should throw a new error
+const myAccountId = process.env.MY_ACCOUNT_ID;
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
+
 if (myAccountId == null ||
-    myPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
+    myPrivateKeyString == null ) {
+    throw new Error("Environment variables MY_ACCOUNT_ID and MY_PRIVATE_KEY must be present");
 }
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
-const client = Client.forTestnet();
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
 
+// -------------------------- Set up testnet client --------------------------
+
+const client = Client.forTestnet();
 client.setOperator(myAccountId, myPrivateKey);
+
+// ---------------------------------------------------------------------------
 
 async function main() {
 
@@ -51,11 +55,11 @@ async function main() {
     let tokenId = nftCreateRx.tokenId;
 
     //Log the token ID
-    console.log(`- Created NFT with Token ID: ${tokenId} \n`);
+    console.log(`Created NFT with Token ID: ${tokenId}`);
 
     const balanceCheckTx = await new AccountBalanceQuery().setAccountId(myAccountId).execute(client);
 
-    console.log(`- User balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} units of token ID ${tokenId}`);
+    console.log(`User balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} units of token ID ${tokenId}`);
 
     process.exit();
 }

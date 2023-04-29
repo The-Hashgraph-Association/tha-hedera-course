@@ -1,5 +1,6 @@
 const {
     TokenNftInfoQuery,
+    TokenInfoQuery,
     Client,
     PrivateKey,
     NftId,
@@ -8,32 +9,42 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Token_Service/.env' });
 
+// ------------------ Get ENV variables and validate them --------------------
+
 const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
+
+if (myAccountId == null ||
+    myPrivateKeyString == null ) {
+    throw new Error("Environment variables MY_ACCOUNT_ID and MY_PRIVATE_KEY must be present");
+}
+
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
 
 const tokenId = process.env.NFT_ID;
+
+// -------------------------- Set up testnet client --------------------------
+
+const client = Client.forTestnet();
+client.setOperator(myAccountId, myPrivateKey);
+
+// ---------------------------------------------------------------------------
 
 // The index of the NFT on the token object - this is the actual NFT
 const NFTTokenIndex = 1;
 
-// If we weren't able to grab it, we should throw a new error
-if (myAccountId == null ||
-    myPrivateKey == null ) {
-    throw new Error("Environment variables myAccountId and myPrivateKey must be present");
-}
-
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
-const client = Client.forTestnet();
-
-client.setOperator(myAccountId, myPrivateKey);
-
 async function main() {
     console.log(`Searching for NFT ID ${NFTTokenIndex} on token ${tokenId}`);
     
-    //Returns the info for the specified NFT ID
+    // Plausibility check - has the token been set up?
+    const tokenSupplyInfo = await new TokenInfoQuery().setTokenId(tokenId).execute(client);
+    if (!tokenSupplyInfo || tokenSupplyInfo?.totalSupply == 0) {
+        throw new Error(`Total supply on NFT ${tokenId} is 0, you need to mint something first`);
+    }
+
+    const nftId = new NftId(TokenId.fromString(tokenId), NFTTokenIndex);
     const nftInfos = await new TokenNftInfoQuery()
-        .setNftId(new NftId(TokenId.fromString(tokenId), NFTTokenIndex))
+        .setNftId(nftId)
         .execute(client);
 
     console.log("The ID of the token is: " + nftInfos[0].nftId.tokenId.toString());
