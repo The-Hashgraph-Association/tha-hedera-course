@@ -5,25 +5,27 @@ const {
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Scheduled_TX/.env' });
 
+// ------------------ Get ENV variables and validate them --------------------
+
 const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
 
 const scheduleId = process.env.SCHEDULE_ID;
-
-// If we weren't able to grab it, we should throw a new error
 if (myAccountId == null ||
-    myPrivateKey == null ) {
+    myPrivateKeyString == null ) {
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
 }
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
-const client = Client.forTestnet();
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
 
+// -------------------------- Set up testnet client --------------------------
+
+const client = Client.forTestnet();
 client.setOperator(myAccountId, myPrivateKey);
 
-async function main() {
+// ---------------------------------------------------------------------------
 
+async function main() {
     //Create the transaction and sign with the admin key
     const transaction = await new ScheduleDeleteTransaction()
         .setScheduleId(scheduleId)
@@ -38,7 +40,7 @@ async function main() {
 
     //Get the transaction status
     const transactionStatus = receipt.status;
-    console.log("The transaction consensus status is " +transactionStatus);
+    console.log("The transaction consensus status is " +transactionStatus.toString());
 
     process.exit();
 }

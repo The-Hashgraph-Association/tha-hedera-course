@@ -3,28 +3,31 @@ const {
     Client,
     ScheduleCreateTransaction,
     PrivateKey,
-    Hbar, ScheduleInfoQuery
+    Hbar
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: 'Scheduled_TX/.env' });
 
+// ------------------ Get ENV variables and validate them --------------------
+
 const myAccountId = process.env.MY_ACCOUNT_ID;
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
+const myPrivateKeyString = process.env.MY_PRIVATE_KEY;
 
 const otherAccountId = process.env.OTHER_ACCOUNT_ID;
 const otherAccountId2 = process.env.OTHER_ACCOUNT_ID_2;
-const otherPrivateKey = PrivateKey.fromString(process.env.OTHER_PRIVATE_KEY);
 
-// If we weren't able to grab it, we should throw a new error
 if (myAccountId == null ||
-    myPrivateKey == null ) {
+    myPrivateKeyString == null ) {
     throw new Error("Environment variables myAccountId and myPrivateKey must be present");
 }
 
-// Create our connection to the Hedera network
-// The Hedera JS SDK makes this really easy!
-const client = Client.forTestnet();
+const myPrivateKey = PrivateKey.fromString(myPrivateKeyString);
 
+// -------------------------- Set up testnet client --------------------------
+
+const client = Client.forTestnet();
 client.setOperator(myAccountId, myPrivateKey);
+
+// ---------------------------------------------------------------------------
 
 async function main() {
 
@@ -36,7 +39,7 @@ async function main() {
     //Schedule a transaction
     const scheduleTransaction = await new ScheduleCreateTransaction()
         .setScheduledTransaction(transaction)
-        .setScheduleMemo("Scheduled TX!")
+        .setScheduleMemo("Scheduled Transaction Demo!")
         .setAdminKey(myPrivateKey)
         .execute(client);
 
@@ -49,7 +52,7 @@ async function main() {
 
     //Get the scheduled transaction ID
     const scheduledTxId = receipt.scheduledTransactionId;
-    console.log("The scheduled transaction ID is " +scheduledTxId);
+    console.log("The scheduled transaction ID is " +scheduledTxId.toString());
 
     process.exit();
 }

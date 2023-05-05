@@ -40,7 +40,7 @@ async function main() {
     // Get the transaction consensus status
     const transactionStatus = receipt.status;
 
-    console.log("The transaction consensus status is " + transactionStatus);
+    console.log("The transaction consensus status is " + transactionStatus.toString());
 
     // Create the queries
     const queryMine = new AccountBalanceQuery().setAccountId(myAccountId);
